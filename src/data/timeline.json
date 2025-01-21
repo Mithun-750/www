@@ -1,0 +1,45 @@
+{
+  "logs": [
+    {
+      "title": "Application Dev Intern",
+      "organization": "Qubitrics",
+      "link": "https://interacly.com/",
+      "period": "2024 - Present",
+      "status": "ongoing",
+      "type": "work"
+    },
+    {
+      "title": "Web Dev Lead",
+      "organization": "IOTA Club, IIIT Sricity",
+      "period": "2024 - 2025",
+      "status": "ongoing",
+      "type": "leadership"
+    },
+    {
+      "title": "Web Dev Intern",
+      "organization": "EasyCapital",
+      "link": "https://easycapital.co.in/",
+      "period": "2023",
+      "type": "work"
+    },
+    {
+      "title": "Web Dev Core",
+      "organization": "GDSC Club, IIIT Sricity",
+      "period": "2023 - 2024",
+      "type": "leadership"
+    },
+    {
+      "title": "Web Dev Core",
+      "organization": "IOTA Club, IIIT Sricity",
+      "period": "2023 - 2024",
+      "type": "leadership"
+    },
+    {
+      "title": "BTech in CSE",
+      "organization": "IIIT Sricity",
+      "period": "2022 - 2026",
+      "status": "ongoing",
+      "type": "education"
+    }
+  ]
+}

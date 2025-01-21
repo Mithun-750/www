@@ -1,0 +1,67 @@
+{
+  "projects": [
+    {
+      "title": "Splitwise Web3",
+      "description": "A decentralized expense sharing application built on Web3 technology. Allows users to split expenses and settle debts using blockchain technology for transparent and secure transactions.",
+      "image": "/projects/splitwise.png",
+      "github": "https://github.com/Mithun-750/splitwise-web3",
+      "link": "https://splitwise-web3.vercel.app/"
+    },
+    {
+      "title": "3D Classroom Simulator",
+      "description": "An immersive 3D virtual classroom environment. Built with OpenGL and C++.",
+      "image": "/projects/classroom.png",
+      "github": "https://github.com/Mithun-750/3D-classroom-simulator",
+      "link": ""
+    },
+    {
+      "title": "Car Rental System",
+      "description": "A comprehensive car rental platform built. Includes features like booking management, vehicle tracking, and user authentication.",
+      "image": "/projects/car-rental.png",
+      "github": "https://github.com/Mithun-750/CarRentalMotorQ",
+      "link": ""
+    },
+    {
+      "title": "NoteDrop",
+      "description": "A modern note-taking application with cloud synchronization. Features a clean interface, rich text editing, and real-time updates.",
+      "image": "/projects/notedrop.png",
+      "github": "https://github.com/Mithun-750/NoteDrop-frontend",
+      "link": "https://notedrop-750.netlify.app/"
+    },
+    {
+      "title": "Vartha",
+      "description": "A news aggregation platform that curates and presents news from various sources. Features categorized news feeds and personalized recommendations.",
+      "image": "/projects/vartha.png",
+      "github": "https://github.com/Mithun-750/Vartha",
+      "link": "https://vartha.netlify.app/"
+    },
+    {
+      "title": "HIVE Website",
+      "description": "A Reddit-like community discussion platform built using ejs. Features a modern design, post and comment system, and upvote/downvote functionality.",
+      "image": "/projects/hive.png",
+      "github": "https://github.com/HIVE-FSD/Website",
+      "link": ""
+    },
+    {
+      "title": "Tic Tac Toe",
+      "description": "A modern implementation of the classic Tic Tac Toe game with a clean UI and multiplayer support.",
+      "image": "/projects/tictactoe.png",
+      "github": "https://github.com/Mithun-750/tic-tac-toe",
+      "link": "https://tic-tac-toe-750.netlify.app/"
+    },
+    {
+      "title": "News App",
+      "description": "A real-time news application that delivers the latest headlines and stories. Features a responsive design and category-based news filtering.",
+      "image": "/projects/news.png",
+      "github": "https://github.com/Mithun-750/news-app",
+      "link": "https://news-app-750.netlify.app/"
+    },
+    {
+      "title": "Weather App",
+      "description": "A sleek weather application providing detailed weather forecasts and conditions. Features an intuitive interface and location-based weather updates.",
+      "image": "/projects/weather.png",
+      "github": "https://github.com/Mithun-750/weather-app",
+      "link": "https://weather-app-750.netlify.app/"
+    }
+  ]
+}
