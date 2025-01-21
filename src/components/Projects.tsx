@@ -14,7 +14,7 @@ export default function Projects() {
 
   useGSAP(
     () => {
-      const elements = gsap.utils.toArray(".project-card");
+      const elements = gsap.utils.toArray<HTMLElement>(".project-card");
       elements.forEach((element) => {
         gsap.from(element, {
           y: 100,

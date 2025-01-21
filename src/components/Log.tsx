@@ -92,7 +92,10 @@ export default function Log() {
                     <div className="flex items-start text-green-400 opacity-90">
                       <span className="text-slate-500 mr-2">❯</span>
                       <span>
-                        status: <span className="text-green-400">"active"</span>
+                        status:{" "}
+                        <span className="text-green-400">
+                          &quot;active&quot;
+                        </span>
                         <span className="status-cursor ml-1">█</span>
                       </span>
                     </div>
@@ -100,9 +103,9 @@ export default function Log() {
                 </div>
                 <div
                   className={`px-4 py-1.5 rounded text-xs uppercase tracking-wider whitespace-nowrap ${
-                    log.type === "work"
+                    log.type === "internship"
                       ? "bg-blue-500/10 text-blue-400"
-                      : log.type === "leadership"
+                      : log.type === "club-activity"
                       ? "bg-purple-500/10 text-purple-400"
                       : "bg-green-500/10 text-green-400"
                   }`}
