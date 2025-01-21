@@ -147,10 +147,10 @@ export default function Footer() {
 
             <div className="text-center md:text-right">
               <a
-                href="mailto:mai4mithun.u@gmail.com"
+                href="mailto:mail4mithun.u@gmail.com"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
-                mai4mithun.u@gmail.com
+                mail4mithun.u@gmail.com
               </a>
             </div>
           </div>
