@@ -20,12 +20,42 @@ export const metadata: Metadata = {
   keywords: [
     "Mithun U",
     "Application Developer",
+    "Web3 Developer",
+    "Splitwise Web3",
+    "3D Classroom Simulator",
     "React",
     "Next.js",
     "Electron.js",
+    "Blockchain",
+    "Full Stack Developer",
     "Bengaluru",
     "India",
   ],
+  authors: [{ name: "Mithun U" }],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://mithun-portfolio.vercel.app",
+    title: "Mithun U | Web3 & Full Stack Developer",
+    description:
+      "Explore innovative projects including Splitwise Web3, 3D Classroom Simulator, and full-stack applications. Expertise in blockchain, React, and Next.js development.",
+    siteName: "Mithun U Portfolio",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google:
+      "google-site-verification=GfrczrDd0TdPx9PZuXl2Bc9ZEXDfGEuPI1Ljat9cpg4",
+  },
 };
 
 export default function RootLayout({
