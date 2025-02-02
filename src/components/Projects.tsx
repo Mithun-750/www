@@ -43,7 +43,7 @@ export default function Projects() {
           {projectsData.projects.map((project, index) => (
             <div
               key={index}
-              className="project-card group bg-secondary p-4 rounded-xl overflow-hidden transition-transform hover:scale-105"
+              className="project-card group bg-secondary p-4 rounded-xl overflow-hidden transition-transform hover:scale-105 flex flex-col"
             >
               <div className="relative h-48 mb-4 overflow-hidden rounded-lg">
                 <Image
@@ -55,7 +55,7 @@ export default function Projects() {
               </div>
               <h3 className="text-xl font-bold mb-2">{project.title}</h3>
               <p className="text-primary-muted mb-4">{project.description}</p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 mt-auto justify-end">
                 {project.link && (
                   <a
                     href={project.link}

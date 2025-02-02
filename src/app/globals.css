@@ -33,6 +33,10 @@ body {
   cursor: none;
 }
 
+*:hover {
+  cursor: none;
+}
+
 .cursor-dot {
   width: 5px;
   height: 5px;
