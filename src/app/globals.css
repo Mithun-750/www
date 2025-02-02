@@ -30,6 +30,41 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  cursor: none;
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: theme('colors.primary.DEFAULT');
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.1s;
+}
+
+.cursor-ring {
+  width: 25px;
+  height: 25px;
+  border: 2px solid theme('colors.accent.light');
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.15s ease-out;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
+.cursor-ring.hover {
+  width: 40px;
+  height: 40px;
+  margin-left: -17.5px;
+  margin-top: -17.5px;
+  border-color: theme('colors.primary.muted');
 }
 
 /* Custom scrollbar */
@@ -48,4 +83,36 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: rgb(168, 124, 124);
+  /* primary color */
+  opacity: 0.5;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.1s ease-out;
+}
+
+.custom-cursor.hover {
+  transform: scale(1.5);
+  background: rgb(180, 140, 140);
+  /* accent-light color */
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) {
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
 }
