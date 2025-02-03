@@ -52,7 +52,7 @@ export default function Hero() {
           A passionate developer from Bengaluru, India, specializing in creating
           modern and performant web applications
         </p>
-        <div className="hero-text flex gap-6">
+        <div className="hero-text flex flex-wrap items-center justify-center gap-6">
           <a
             href="https://linkedin.com/in/mithun-u750"
             target="_blank"
@@ -66,6 +66,30 @@ export default function Hero() {
             className="px-6 py-3 border border-primary rounded-lg hover:bg-primary/10 transition-colors"
           >
             Contact me
+          </a>
+          <a
+            href="/Mithun.U_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative px-6 py-3 font-medium text-primary border-2 border-primary rounded-lg overflow-hidden transition-colors duration-300 ease-out hover:text-secondary-deep"
+          >
+            <span className="absolute inset-0 w-0 bg-gradient-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="relative flex items-center gap-2">
+              Resume
+              <svg
+                className="w-4 h-4 transform transition-transform duration-300 ease-out group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </span>
           </a>
         </div>
       </section>
