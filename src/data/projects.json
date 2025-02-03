@@ -1,6 +1,13 @@
 {
   "projects": [
     {
+      "title": "AI Chat",
+      "description": "A place where you can chat with free LLMs from Hugging Face, built with Next.js and Langchain",
+      "image": "/projects/ai-chat.png",
+      "github": "https://github.com/yantrAI/ai-chat",
+      "link": ""
+    },
+    {
       "title": "Splitwise Web3",
       "description": "A decentralized expense sharing application built on Web3 technology. Allows users to split expenses and settle debts using blockchain technology for transparent and secure transactions.",
       "image": "/projects/splitwise.png",
