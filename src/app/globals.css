@@ -33,6 +33,31 @@ body {
   cursor: none;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.accent.dark');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.primary.muted');
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.primary.DEFAULT');
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.primary.muted') theme('colors.accent.dark');
+}
+
 *:hover {
   cursor: none;
 }

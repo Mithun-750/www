@@ -1,22 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
-import { MessageSquare, X, Send, Loader2 } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import { MessageSquare, X, Send, Loader2 } from "lucide-react";
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -27,29 +27,29 @@ export default function ChatBot() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
+    const userMessage = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
       });
 
-      if (!response.ok) throw new Error('Failed to get response');
-      if (!response.body) throw new Error('No response body');
+      if (!response.ok) throw new Error("Failed to get response");
+      if (!response.body) throw new Error("No response body");
 
       // Create a new message with empty content
-      const assistantMessage = { role: 'assistant', content: '' };
-      setMessages(prev => [...prev, assistantMessage]);
+      const assistantMessage = { role: "assistant", content: "" };
+      setMessages((prev) => [...prev, assistantMessage]);
 
       // Setup streaming
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-      let accumulatedText = '';
+      let accumulatedText = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -60,18 +60,24 @@ export default function ChatBot() {
         accumulatedText += chunk;
 
         // Update the message with the complete text so far
-        setMessages(prev => {
+        setMessages((prev) => {
           const newMessages = [...prev];
           newMessages[newMessages.length - 1] = {
-            role: 'assistant',
-            content: accumulatedText
+            role: "assistant",
+            content: accumulatedText,
           };
           return newMessages;
         });
       }
     } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
+      console.error("Error:", error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, I encountered an error. Please try again.",
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -101,17 +107,17 @@ export default function ChatBot() {
                 <div
                   key={idx}
                   className={`mb-4 ${
-                    msg.role === 'user' ? 'text-right' : 'text-left'
+                    msg.role === "user" ? "text-right" : "text-left"
                   }`}
                 >
                   <div
                     className={`inline-block max-w-[80%] p-3 rounded-lg ${
-                      msg.role === 'user'
-                        ? 'bg-gradient-accent text-secondary-deep ml-auto'
-                        : 'bg-secondary text-primary'
+                      msg.role === "user"
+                        ? "bg-gradient-accent text-secondary-deep ml-auto"
+                        : "bg-secondary text-primary"
                     }`}
                   >
-                    <ReactMarkdown 
+                    <ReactMarkdown
                       className="prose prose-invert max-w-none"
                       components={{
                         a: ({ node, ...props }) => (
