@@ -2,6 +2,7 @@ import BackgroundPattern from "@/components/BackgroundPattern";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ChatBotWrapper from "@/components/ChatBotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,13 +34,28 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Mithun U" }],
   openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: "https://mithun-portfolio.vercel.app",
-    title: "Mithun U | Web3 & Full Stack Developer",
+    title: "Mithun U | Application Developer",
     description:
-      "Explore innovative projects including Splitwise Web3, 3D Classroom Simulator, and full-stack applications. Expertise in blockchain, React, and Next.js development.",
-    siteName: "Mithun U Portfolio",
+      "Hi, I'm Mithun U, a passionate Application Developer based in Bangalore, India. I specialize in building exceptional digital experiences.",
+    url: "https://mithun.dev",
+    siteName: "Mithun U | Application Developer",
+    images: [
+      {
+        url: "https://mithun.dev/og.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mithun U | Application Developer",
+    description:
+      "Hi, I'm Mithun U, a passionate Application Developer based in Bangalore, India. I specialize in building exceptional digital experiences.",
+    creator: "@Mithun750",
+    images: ["https://mithun.dev/og.png"],
   },
   robots: {
     index: true,
@@ -70,6 +86,7 @@ export default function RootLayout({
       >
         <BackgroundPattern />
         {children}
+        <ChatBotWrapper />
       </body>
     </html>
   );
