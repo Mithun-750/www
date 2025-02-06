@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
-import { MessageSquare, X, Send, Loader2 } from "lucide-react";
+import { MessageSquare, X, Send } from "lucide-react";
 import MatrixLoader from "./MatrixLoader";
 
 interface Message {
@@ -70,7 +70,7 @@ export default function ChatBot() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage = { role: "user", content: input };
+    const userMessage: Message = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
@@ -86,7 +86,7 @@ export default function ChatBot() {
       if (!response.body) throw new Error("No response body");
 
       // Create a new message with empty content
-      const assistantMessage = { role: "assistant", content: "" };
+      const assistantMessage: Message = { role: "assistant", content: "" };
       setMessages((prev) => [...prev, assistantMessage]);
 
       // Setup streaming
@@ -171,7 +171,7 @@ export default function ChatBot() {
                     <ReactMarkdown
                       className="prose prose-invert max-w-none"
                       components={{
-                        a: ({ node, ...props }) => (
+                        a: ({ ...props }) => (
                           <a
                             {...props}
                             className="text-accent-light hover:text-primary underline transition-colors"

@@ -146,13 +146,14 @@ export async function POST(req: Request) {
         "Transfer-Encoding": "chunked",
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Chat API Error:", error);
-    console.error("Error details:", {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-    });
+    const errorDetails = {
+      name: error instanceof Error ? error.name : 'Unknown Error',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    };
+    console.error("Error details:", errorDetails);
     return new Response(JSON.stringify({ error: "Failed to process your request" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
