@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { MessageSquare, X, Send, Loader2 } from "lucide-react";
+import MatrixLoader from "./MatrixLoader";
 
 interface Message {
   role: "user" | "assistant";
@@ -187,11 +188,7 @@ export default function ChatBot() {
               ))}
               {isLoading && (
                 <div className="text-left mb-4">
-                  <div className="inline-flex gap-1.5 bg-secondary text-primary p-3 rounded-2xl border border-primary/20 shadow-lg">
-                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.2s]"></span>
-                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.4s]"></span>
-                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.6s]"></span>
-                  </div>
+                  <MatrixLoader />
                 </div>
               )}
               <div ref={messagesEndRef} />
