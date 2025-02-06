@@ -14,6 +14,21 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatbotRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        chatbotRef.current &&
+        !chatbotRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -22,6 +37,33 @@ export default function ChatBot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Scroll to bottom when chat opens
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [isOpen]);
+
+  // Fetch initial message when chat opens
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      const fetchInitialMessage = async () => {
+        try {
+          setIsLoading(true);
+          const response = await fetch("/api/chat");
+          if (!response.ok) throw new Error("Failed to get initial message");
+          const data = await response.json();
+          setMessages([{ role: "assistant", content: data.message }]);
+        } catch (error) {
+          console.error("Error fetching initial message:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchInitialMessage();
+    }
+  }, [isOpen, messages.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,21 +130,29 @@ export default function ChatBot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={chatbotRef}
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute bottom-16 right-0 w-80 sm:w-96 bg-secondary rounded-lg shadow-xl overflow-hidden"
+            className="absolute bottom-16 right-0 w-80 sm:w-96 bg-secondary-deep rounded-2xl shadow-2xl overflow-hidden border border-primary/20"
           >
-            <div className="bg-gradient-accent p-4 text-secondary-deep font-medium flex justify-between items-center">
-              <span>Virtual Assistant</span>
+            <div className="bg-secondary-deep border-b border-primary/10 p-4 text-primary font-medium flex justify-between items-center">
+              <div className="flex items-center gap-2.5">
+                <div className="bg-gradient-accent p-1.5 rounded-lg">
+                  <MessageSquare className="w-4 h-4 text-secondary-deep" />
+                </div>
+                <span className="text-sm font-medium tracking-wide">
+                  Assistant
+                </span>
+              </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-primary/20 rounded-full transition-colors"
+                className="p-1.5 text-primary/70 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
               >
-                <X size={20} />
+                <X size={16} />
               </button>
             </div>
-            <div className="h-96 overflow-y-auto p-4 bg-secondary-deep/50">
+            <div className="h-96 overflow-y-auto p-4 bg-gradient-main/30 backdrop-blur-sm">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -111,10 +161,10 @@ export default function ChatBot() {
                   }`}
                 >
                   <div
-                    className={`inline-block max-w-[80%] p-3 rounded-lg ${
+                    className={`inline-block max-w-[80%] p-3 rounded-2xl ${
                       msg.role === "user"
-                        ? "bg-gradient-accent text-secondary-deep ml-auto"
-                        : "bg-secondary text-primary"
+                        ? "bg-gradient-accent text-secondary-deep ml-auto shadow-lg"
+                        : "bg-secondary text-primary border border-primary/20 shadow-lg"
                     }`}
                   >
                     <ReactMarkdown
@@ -137,28 +187,34 @@ export default function ChatBot() {
               ))}
               {isLoading && (
                 <div className="text-left mb-4">
-                  <div className="inline-block bg-secondary text-primary p-3 rounded-lg">
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                  <div className="inline-flex gap-1.5 bg-secondary text-primary p-3 rounded-2xl border border-primary/20 shadow-lg">
+                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.2s]"></span>
+                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.4s]"></span>
+                    <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-[bounce_1.4s_infinite_.6s]"></span>
                   </div>
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
-            <form onSubmit={handleSubmit} className="p-4 bg-secondary-deep">
+            <form
+              onSubmit={handleSubmit}
+              className="p-4 bg-secondary-deep border-t border-primary/20"
+            >
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-secondary p-2 rounded-lg text-primary placeholder:text-primary/50 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="flex-1 bg-secondary border border-primary/20 rounded-xl px-4 py-2.5 text-sm text-primary placeholder:text-primary/50 focus:outline-none focus:ring-2 focus:ring-accent-light/50 focus:border-accent-light/50 transition-all"
+                  disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="p-2 bg-gradient-accent text-secondary-deep rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+                  className="bg-gradient-accent text-secondary-deep p-2.5 rounded-xl font-medium hover:opacity-90 transition-all disabled:opacity-50 disabled:hover:opacity-50 shadow-lg"
                 >
-                  <Send size={20} />
+                  <Send size={18} className="transform rotate-45" />
                 </button>
               </div>
             </form>
@@ -169,7 +225,7 @@ export default function ChatBot() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-gradient-accent p-3 rounded-full text-secondary-deep shadow-lg hover:shadow-xl transition-shadow"
+        className="bg-gradient-accent p-3 rounded-full text-secondary-deep shadow-lg hover:shadow-xl transition-all"
       >
         <MessageSquare size={24} />
       </motion.button>

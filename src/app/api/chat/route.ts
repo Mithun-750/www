@@ -49,6 +49,41 @@ let chatHistory = [
   ...chatExamples.parts,
 ];
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+export async function GET() {
+  try {
+    const greeting = getGreeting();
+    // Use the same chat history and context for initial message with time-based greeting
+    const result = await model.generateContent({
+      contents: [
+        ...chatHistory.map(msg => ({
+          role: "user" as const,
+          parts: [{ text: msg.text }]
+        })),
+        {
+          role: "user" as const,
+          parts: [{ text: `Generate a warm welcome message starting with '${greeting}' that briefly introduces yourself as Mithun's AI assistant and asks how you can help. Keep it concise and friendly.` }]
+        }
+      ],
+      generationConfig: { ...generationConfig, maxOutputTokens: 100 },
+    });
+
+    return NextResponse.json({ message: result.response.text() });
+  } catch (error) {
+    console.error('Error generating initial message:', error);
+    return NextResponse.json(
+      { error: 'Failed to generate initial message' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
