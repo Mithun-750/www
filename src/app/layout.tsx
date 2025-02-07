@@ -2,7 +2,7 @@ import BackgroundPattern from "@/components/BackgroundPattern";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ChatBotWrapper from "@/components/ChatBotWrapper";
+// import ChatBotWrapper from "@/components/ChatBotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,7 +86,7 @@ export default function RootLayout({
       >
         <BackgroundPattern />
         {children}
-        <ChatBotWrapper />
+        {/* <ChatBotWrapper /> */}
       </body>
     </html>
   );
