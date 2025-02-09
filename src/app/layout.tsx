@@ -2,7 +2,7 @@ import BackgroundPattern from "@/components/BackgroundPattern";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// import ChatBotWrapper from "@/components/ChatBotWrapper";
+import ChatBotWrapper from "@/components/ChatBotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -79,6 +79,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const enableChatBot = process.env.NEXT_PUBLIC_ENABLE_CHATBOT === "true";
+
   return (
     <html lang="en" className="scroll-smooth">
       <body
@@ -86,7 +88,7 @@ export default function RootLayout({
       >
         <BackgroundPattern />
         {children}
-        {/* <ChatBotWrapper /> */}
+        {enableChatBot && <ChatBotWrapper />}
       </body>
     </html>
   );
