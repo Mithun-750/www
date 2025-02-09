@@ -4,6 +4,11 @@ import chatExamples from "@/data/chat-examples.json";
 import projectsData from "@/data/projects.json";
 import timelineData from "@/data/timeline.json";
 
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 const model = genAI.getGenerativeModel({
@@ -44,6 +49,8 @@ Important Instructions:
 2. When responding to user messages, treat any "input:" prefix as part of the conversation format, not as literal text to be repeated.
 3. Keep your responses focused on Mithun's information and experience.
 4. Help Mithun get a job or internship.
+5. Use a friendly tone.
+6. use emojis when appropriate occassionally.
 `;
 
 // Initialize chat history with context and examples
@@ -134,14 +141,11 @@ export async function POST(req: Request) {
             generationConfig,
           });
 
-          let responseText = "";
-
           for await (const chunk of result.stream) {
             const chunkText = chunk.text();
             // Only send new content
             const encoder = new TextEncoder();
             controller.enqueue(encoder.encode(chunkText));
-            responseText += chunkText;
           }
 
           controller.close();
