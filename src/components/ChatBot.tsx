@@ -79,7 +79,10 @@ export default function ChatBot() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ 
+          message: input,
+          chatHistory: messages 
+        }),
       });
 
       if (!response.ok) throw new Error("Failed to get response");

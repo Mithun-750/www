@@ -38,10 +38,16 @@ ${projectsContext}
 
 Experience and Education:
 ${timelineContext}
+
+Important Instructions:
+1. NEVER prefix your responses anything like "output:". Your responses should be direct and natural.
+2. When responding to user messages, treat any "input:" prefix as part of the conversation format, not as literal text to be repeated.
+3. Keep your responses focused on Mithun's information and experience.
+4. Help Mithun get a job or internship.
 `;
 
 // Initialize chat history with context and examples
-let chatHistory = [
+const initialChatHistory = [
   { text: `input: ${contextPrompt}` },
   {
     text: "output: I'll help visitors learn about Mithun using this information.",
@@ -51,34 +57,41 @@ let chatHistory = [
 
 function getGreeting() {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Good morning';
-  if (hour < 17) return 'Good afternoon';
-  return 'Good evening';
+  if (hour < 12) return "Good morning";
+  if (hour < 17) return "Good afternoon";
+  return "Good evening";
 }
 
 export async function GET() {
   try {
     const greeting = getGreeting();
-    // Use the same chat history and context for initial message with time-based greeting
+    // Use initial chat history for first message
     const result = await model.generateContent({
       contents: [
-        ...chatHistory.map(msg => ({
+        ...initialChatHistory.map((msg) => ({
           role: "user" as const,
-          parts: [{ text: msg.text }]
+          parts: [{ text: msg.text }],
         })),
         {
           role: "user" as const,
-          parts: [{ text: `Generate a warm welcome message starting with '${greeting}' that briefly introduces yourself as Mithun's AI assistant and asks how you can help. Keep it concise and friendly.` }]
-        }
+          parts: [
+            {
+              text: `Generate a warm welcome message starting with '${greeting}' that briefly introduces yourself as Mithun's AI assistant and asks how you can help. Keep it concise and friendly.`,
+            },
+          ],
+        },
       ],
       generationConfig: { ...generationConfig, maxOutputTokens: 100 },
     });
 
-    return NextResponse.json({ message: result.response.text() });
+    return NextResponse.json({
+      message: result.response.text(),
+      initialHistory: initialChatHistory,
+    });
   } catch (error) {
-    console.error('Error generating initial message:', error);
+    console.error("Error generating initial message:", error);
     return NextResponse.json(
-      { error: 'Failed to generate initial message' },
+      { error: "Failed to generate initial message" },
       { status: 500 }
     );
   }
@@ -86,19 +99,30 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const { message, chatHistory } = await req.json();
     console.log("Received message:", message);
 
-    // Format messages for the model
+    // Format messages for the model using received chat history
     const modelMessages = [
-      ...chatHistory.map(msg => ({
+      ...initialChatHistory.map((msg) => ({
         role: "user" as const,
-        parts: [{ text: msg.text }]
+        parts: [{ text: msg.text }],
+      })),
+      ...chatHistory.map((msg: Message) => ({
+        role: "user" as const,
+        parts: [
+          {
+            text:
+              msg.role === "user"
+                ? `input: ${msg.content}`
+                : `output: ${msg.content}`,
+          },
+        ],
       })),
       {
         role: "user" as const,
-        parts: [{ text: message }]
-      }
+        parts: [{ text: `input: ${message}` }],
+      },
     ];
 
     // Create a new ReadableStream
@@ -120,18 +144,6 @@ export async function POST(req: Request) {
             responseText += chunkText;
           }
 
-          // Update chat history
-          chatHistory = [
-            ...chatHistory,
-            { text: message },
-            { text: responseText }
-          ];
-
-          // Manage history size
-          if (chatHistory.length > 100) {
-            chatHistory = [...chatHistory.slice(0, 50), ...chatHistory.slice(-50)];
-          }
-
           controller.close();
         } catch (error) {
           console.error("Streaming Error:", error);
@@ -149,14 +161,17 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error("Chat API Error:", error);
     const errorDetails = {
-      name: error instanceof Error ? error.name : 'Unknown Error',
+      name: error instanceof Error ? error.name : "Unknown Error",
       message: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
     };
     console.error("Error details:", errorDetails);
-    return new Response(JSON.stringify({ error: "Failed to process your request" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to process your request" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
