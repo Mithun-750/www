@@ -157,8 +157,8 @@ export default function ChatBot() {
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`mb-4 ${
-                    msg.role === "user" ? "text-right" : "text-left"
+                  className={`mb-4 flex ${
+                    msg.role === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   <div
