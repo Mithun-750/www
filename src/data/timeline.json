@@ -1,18 +1,24 @@
 {
   "logs": [
     {
-      "title": "Application Dev Intern",
-      "organization": "Qubitrics",
-      "link": "https://interacly.com/",
-      "period": "2024 - Present",
+      "title": "IT Intern",
+      "organization": "DTCC",
+      "link": "https://www.dtcc.com/",
+      "period": "2025 - Present",
       "status": "ongoing",
+      "type": "internship"
+    },
+    {
+      "title": "Application Dev Intern",
+      "organization": "Qbtrix",
+      "link": "https://qbtrix.com/",
+      "period": "2024 - 2025",
       "type": "internship"
     },
     {
       "title": "Web Dev Lead",
       "organization": "IOTA Club, IIIT Sricity",
       "period": "2024 - 2025",
-      "status": "ongoing",
       "type": "club-activity"
     },
     {
