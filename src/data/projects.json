@@ -8,6 +8,20 @@
       "link": ""
     },
     {
+      "title": "KingKong",
+      "description": "A Chrome extension that provides advanced filtering options for youtube comments",
+      "image": "/projects/kingkong.png",
+      "github": "https://github.com/Mithun-750/king-kong",
+      "link": ""
+    },
+    {
+      "title": "Skill Hub",
+      "description": "A freelance platform for freelancers to find jobs and clients to work for",
+      "image": "/projects/skill-hub.png",
+      "github": "https://github.com/codegasms/SkillHub",
+      "link": "https://frontend.skillhub.shrishtimahor.xyz/"
+    },
+    {
       "title": "Splitwise Web3",
       "description": "A decentralized expense sharing application built on Web3 technology. Allows users to split expenses and settle debts using blockchain technology for transparent and secure transactions.",
       "image": "/projects/splitwise.png",
@@ -55,20 +69,6 @@
       "image": "/projects/tictactoe.png",
       "github": "https://github.com/Mithun-750/tic-tac-toe",
       "link": "https://tic-tac-toe-750.netlify.app/"
-    },
-    {
-      "title": "News App",
-      "description": "A real-time news application that delivers the latest headlines and stories. Features a responsive design and category-based news filtering.",
-      "image": "/projects/news.png",
-      "github": "https://github.com/Mithun-750/news-app",
-      "link": "https://news-app-750.netlify.app/"
-    },
-    {
-      "title": "Weather App",
-      "description": "A sleek weather application providing detailed weather forecasts and conditions. Features an intuitive interface and location-based weather updates.",
-      "image": "/projects/weather.png",
-      "github": "https://github.com/Mithun-750/weather-app",
-      "link": "https://weather-app-750.netlify.app/"
     }
   ]
 }
