@@ -25,9 +25,9 @@ function getModel() {
 
 const generationConfig = {
   temperature: 1,
-  topP: 0.95,
-  topK: 40,
-  maxOutputTokens: 8192,
+  topP: 0.9,
+  topK: 20,
+  maxOutputTokens: 500,
 };
 
 // Create a detailed context from projects and timeline
@@ -116,7 +116,6 @@ export async function POST(req: Request) {
   try {
     const model = getModel();
     const { message, chatHistory } = await req.json();
-    console.log("Received message:", message);
 
     const modelMessages = [
       ...initialChatHistory.map((msg) => ({
