@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://mithun-u.me/sitemap.xml", // Update this with your actual domain
+    sitemap: "https://mithun-u.tech/sitemap.xml",
   };
 }

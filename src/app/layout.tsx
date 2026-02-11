@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     title: "Mithun U | Application Developer",
     description:
       "Hi, I'm Mithun U, a passionate Application Developer based in Bangalore, India. I specialize in building exceptional digital experiences.",
-    url: "https://mithun.dev",
+    url: "https://mithun-u.tech",
     siteName: "Mithun U | Application Developer",
     images: [
       {
-        url: "https://mithun.dev/og.png",
+        url: "https://mithun-u.tech/og.png",
         width: 1200,
         height: 630,
       },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description:
       "Hi, I'm Mithun U, a passionate Application Developer based in Bangalore, India. I specialize in building exceptional digital experiences.",
     creator: "@Mithun750",
-    images: ["https://mithun.dev/og.png"],
+    images: ["https://mithun-u.tech/og.png"],
   },
   robots: {
     index: true,

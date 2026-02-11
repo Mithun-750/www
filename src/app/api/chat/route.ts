@@ -9,11 +9,19 @@ interface Message {
   content: string;
 }
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+function getGenAI() {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error("GEMINI_API_KEY environment variable is not set");
+  }
+  return new GoogleGenerativeAI(apiKey);
+}
 
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
-});
+function getModel() {
+  return getGenAI().getGenerativeModel({
+    model: "gemini-flash-latest",
+  });
+}
 
 const generationConfig = {
   temperature: 1,
@@ -71,8 +79,8 @@ function getGreeting() {
 
 export async function GET() {
   try {
+    const model = getModel();
     const greeting = getGreeting();
-    // Use initial chat history for first message
     const result = await model.generateContent({
       contents: [
         ...initialChatHistory.map((msg) => ({
@@ -106,10 +114,10 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const model = getModel();
     const { message, chatHistory } = await req.json();
     console.log("Received message:", message);
 
-    // Format messages for the model using received chat history
     const modelMessages = [
       ...initialChatHistory.map((msg) => ({
         role: "user" as const,
