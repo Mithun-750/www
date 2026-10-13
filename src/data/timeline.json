@@ -1,5 +1,13 @@
 {
   "logs": [
+     {
+      "title": "IT Edge Analyst",
+      "organization": "DTCC",
+      "link": "https://www.dtcc.com/",
+      "period": "2026 - Present",
+      "type": "full-time",
+      "status": "ongoing"
+    },
     {
       "title": "IT Intern",
       "organization": "DTCC",
@@ -43,7 +51,6 @@
       "title": "BTech in CSE",
       "organization": "IIIT Sricity",
       "period": "2022 - 2026",
-      "status": "ongoing",
       "type": "education"
     }
   ]
